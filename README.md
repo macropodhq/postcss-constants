@@ -67,4 +67,4 @@ local.query: 200px;
 postcss([ require('postcss-local-vars') ])
 ```
 
-Call `postcss-local-vars` before any plugins that will compute values you've stored in variables. See [PostCSS] docs for examples for your environment.
+Call `postcss-local-vars` before any plugins that will compute values stored in variables. See [PostCSS] docs for examples for your environment.
