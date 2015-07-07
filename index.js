@@ -1,8 +1,11 @@
 var postcss = require('postcss');
 var fs = require('fs');
+var _ = require('lodash-node');
 
-module.exports = postcss.plugin('postcss-local-vars', function () {
-    var sets = {};
+module.exports = postcss.plugin('postcss-local-vars', function (opts) {
+    var sets = opts && opts.defaults || {};
+    var globalNode;
+
     var regex = /((?:[A-z]+))( )(from)(\s+)(~)((?:[A-z]+))/g;
 
     var readFile = function(file) {
@@ -13,7 +16,15 @@ module.exports = postcss.plugin('postcss-local-vars', function () {
         var file = readFile(path.replace(/'|"/g, ''));
         var requiredSet = name.replace(/~/g, '');
         var variableSets = eval(file)[0];
-        sets[requiredSet] = variableSets[requiredSet];
+        if (variableSets[requiredSet]) {
+            if (sets[requiredSet]) {
+                sets[requiredSet] = _.assign({}, sets[requiredSet], variableSets[requiredSet]);
+            }
+
+            else {
+                sets[requiredSet] = variableSets[requiredSet];
+            }
+        }
     };
 
     var requiresAction = function(context) {
@@ -21,6 +32,13 @@ module.exports = postcss.plugin('postcss-local-vars', function () {
     };
 
     var getValue = function(variable, parent) {
+        if (!sets[parent]) {
+            throw globalNode.error('No such set `' + parent + '`');
+        }
+
+        if (!sets[parent][variable]) {
+            throw globalNode.error('No such variable `' + variable + '` in `' + parent + '`');
+        }
         return sets[parent][variable];
     };
 
@@ -45,6 +63,7 @@ module.exports = postcss.plugin('postcss-local-vars', function () {
 
     return function (css) {
         css.eachInside(function (node) {
+            globalNode = node;
             if (node.prop && node.prop.indexOf('~') > -1) {
                 getVariables(node.prop, node.value);
             }

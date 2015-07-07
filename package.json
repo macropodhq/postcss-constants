@@ -26,7 +26,8 @@
     "chai": "^3.0.0",
     "gulp": "^3.9.0",
     "gulp-eslint": "^0.14.0",
-    "gulp-mocha": "^2.1.2"
+    "gulp-mocha": "^2.1.2",
+    "lodash-node": "^3.10.0"
   },
   "scripts": {
     "test": "gulp"

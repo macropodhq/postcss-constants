@@ -90,4 +90,19 @@
 postcss([ require('postcss-local-vars') ])
 ```
 
+You can pass a default set of variables (that can be overriden), if you want to update default variables in webpack hot reload:
+
+
+```js
+postcss([
+  localVars({
+    defaults: {
+      colors: {
+        primary: 'blue',
+      },
+    }
+  })
+])
+```
+
 Call `postcss-local-vars` before any plugins that will compute values stored in variables. See [PostCSS] docs for examples for your environment.

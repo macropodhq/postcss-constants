@@ -53,4 +53,12 @@ describe('postcss-local-vars', function () {
     it('multiple variables in a single value', function (done) {
         test('~borders: "test/vars.json"; a{border: weight from ~borders style from ~borders black}', '~borders: "test/vars.json"; a{border: 2px solid black}', { }, done);
     });
+
+    it('overrides default variables', function (done) {
+        test('~colors: "test/vars.json"; a{color: primary from ~colors;}', '~colors: "test/vars.json"; a{color: #8EE7D3;}', { defaults: {colors: {primary: 'red'} } }, done);
+    });
+
+    it('default variables', function (done) {
+        test('~colors: "test/vars.json"; a{color: secondary from ~colors;}', '~colors: "test/vars.json"; a{color: red;}', { defaults: {colors: {secondary: 'red'} } }, done);
+    });
 });
