@@ -19,30 +19,38 @@ describe('postcss-local-vars', function () {
     });
 
     it('replaces variables in values', function (done) {
-        test('a{color: import local.green from "./test/vars.css"}', 'a{color: #8EE7D3}', { }, done);
+        test('~colors: "test/vars.json"; a{color: primary from ~colors;}', '~colors: "test/vars.json"; a{color: #8EE7D3;}', { }, done);
     });
 
-    it('replaces variables in values with semi-colons', function (done) {
-        test('a{color: import local.green from "./test/vars.css";}', 'a{color: #8EE7D3;}', { }, done);
+    it('replaces variables in values without semi-colons', function (done) {
+        test('~colors: "test/vars.json"; a{background: blue; color: primary from ~colors}', '~colors: "test/vars.json"; a{background: blue; color: #8EE7D3}', { }, done);
     });
 
     it('replaces variables in values with single quotes', function (done) {
-        test('a{color: import local.green from \'./test/vars.css\';}', 'a{color: #8EE7D3;}', { }, done);
+        test('~colors: \'test/vars.json\'; a{color: primary from ~colors;}', '~colors: \'test/vars.json\'; a{color: #8EE7D3;}', { }, done);
     });
 
     it('replaces variables at start of value', function (done) {
-        test('a{border: import local.borderWeight from "./test/vars.css" solid #8EE7D3;}', 'a{border: 2px solid #8EE7D3;}', { }, done);
+        test('~borders: "test/vars.json"; a{border: weight from ~borders solid #8EE7D3;}', '~borders: "test/vars.json"; a{border: 2px solid #8EE7D3;}', { }, done);
     });
 
     it('replaces variables in middle of value', function (done) {
-        test('a{border: 2px import local.borderStyle from "./test/vars.css" #8EE7D3;}', 'a{border: 2px solid #8EE7D3;}', { }, done);
+        test('~borders: "test/vars.json"; a{border: 2px style from ~borders #8EE7D3;}', '~borders: "test/vars.json"; a{border: 2px solid #8EE7D3;}', { }, done);
     });
 
     it('replaces variables at end of value', function (done) {
-        test('a{border: 2px solid import local.green from "./test/vars.css";}', 'a{border: 2px solid #8EE7D3;}', { }, done);
+        test('~colors: "test/vars.json"; a{border: 2px solid primary from ~colors;}', '~colors: "test/vars.json"; a{border: 2px solid #8EE7D3;}', { }, done);
     });
 
     it('replaces variables in @ rules', function (done) {
-        test('@media (max-width: import local.mediaQuery from "./test/vars.css") {color: red;}', '@media (max-width: 200px) {color: red;}', { }, done);
+        test('~queries: "test/vars.json"; @media (max-width: maxWidth from ~queries) {color: red;}', '~queries: "test/vars.json"; @media (max-width: 200px) {color: red;}', { }, done);
+    });
+
+    it('multiple sources', function (done) {
+        test('~colors: "test/vars.json"; ~borders: "test/vars.json"; a{color: primary from ~colors; border: 2px style from ~borders black}', '~colors: "test/vars.json"; ~borders: "test/vars.json"; a{color: #8EE7D3; border: 2px solid black}', { }, done);
+    });
+
+    it('multiple variables in a single value', function (done) {
+        test('~borders: "test/vars.json"; a{border: weight from ~borders style from ~borders black}', '~borders: "test/vars.json"; a{border: 2px solid black}', { }, done);
     });
 });

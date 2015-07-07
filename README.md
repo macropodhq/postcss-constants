@@ -6,17 +6,24 @@
 [ci-img]:  https://travis-ci.org/ojame/postcss-local-vars.svg
 [ci]:      https://travis-ci.org/ojame/postcss-local-vars
 
-```css
-/* var.css */
-local.primaryGreen: #8EE7D3;
+**vars.json**
+```js
+[{
+  colors: {
+    primary: '#8EE7D3',
+  },
+}]
 ```
 
+**input**
 ```css
+~colors: "./vars.json";
 .foo {
-  color: import local.primaryGreen from './vars.css';
+  color: primary from ~colors;
 }
 ```
 
+**output**
 ```css
 .foo {
   color: #8EE7D3;
@@ -25,36 +32,52 @@ local.primaryGreen: #8EE7D3;
 
 #### Within static values
 
-```css
-/* var.css */
-local.primaryGreen: #8EE7D3;
+**vars.json**
+```js
+[{
+  borders: {
+    weight: '2px',
+    style: 'solid',
+  },
+}]
 ```
 
+**input**
 ```css
+~borders: "./vars.json";
 .foo {
-  border: 2px solid import local.primaryGreen from './vars.css';
+  border: weight from ~borders style from ~borders black;
 }
 ```
 
+**output**
 ```css
 .foo {
-  border: 2px solid #8EE7D3;
+  border: 2px solid black;
 }
 ```
 
 #### @ Rules
 
-```css
-/* var.css */
-local.query: 200px;
+**vars.json**
+```js
+[{
+  queries: {
+    maxWidth: '200px',
+  },
+}]
 ```
 
+**input**
 ```css
-@media (max-width: import local.query from './vars.css') {
+~queries: "./vars.json";
+
+@media (max-width: maxWidth from ~queries) {
   color: blue;
 }
 ```
 
+**output**
 ```css
 @media (max-width: 200px) {
   color: blue;

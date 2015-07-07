@@ -2,25 +2,26 @@ var postcss = require('postcss');
 var fs = require('fs');
 
 module.exports = postcss.plugin('postcss-local-vars', function () {
-    var importRegex = /((import)(\s+)(local)(\.))((?:[A-z]+))( )(from)( )(".*?"|'.*?')/g;
-    var nameRegex = /.*?((local)(\.))((?:[A-z]+))/g;
+    var sets = {};
+    var regex = /((?:[A-z]+))( )(from)(\s+)(~)((?:[A-z]+))/g;
 
     var readFile = function(file) {
         return fs.readFileSync(file, 'utf8');
     };
 
+    var getVariables = function(name, path) {
+        var file = readFile(path.replace(/'|"/g, ''));
+        var requiredSet = name.replace(/~/g, '');
+        var variableSets = eval(file)[0];
+        sets[requiredSet] = variableSets[requiredSet];
+    };
+
     var requiresAction = function(context) {
-        return context.indexOf('import local.') !== -1;
+        return context.indexOf(' ~') !== -1;
     };
 
-    var getPath = function(context) {
-        var pathMatches = importRegex.exec(context);
-        return pathMatches[pathMatches.length - 1].replace(/'|"/g, '');
-    };
-
-    var getName = function(context) {
-        var nameMatches = nameRegex.exec(context);
-        return nameMatches[nameMatches.length - 1];
+    var getValue = function(variable, parent) {
+        return sets[parent][variable];
     };
 
     var strip = function(context) {
@@ -28,16 +29,26 @@ module.exports = postcss.plugin('postcss-local-vars', function () {
             return context;
         }
 
-        var variablesFile = readFile(getPath(context));
-        var variablesRegex = new RegExp('(local\.' + getName(context) + ')(:).*?(.*?)(;)', 'g');
-        var variables = variablesRegex.exec(variablesFile);
-        var value = variables[variables.length - 2].trim();
+        var requires = context.match(regex);
 
-        return context.replace(importRegex, value);
+        requires.forEach(function(require) {
+            var matches = regex.exec(require);
+            regex.lastIndex = 0;
+            var variable = matches[1];
+            var variableSet = matches[matches.length - 1];
+
+            context = context.replace(require, getValue(variable, variableSet));
+        });
+
+        return context;
     };
 
     return function (css) {
         css.eachInside(function (node) {
+            if (node.prop && node.prop.indexOf('~') > -1) {
+                getVariables(node.prop, node.value);
+            }
+
             if (node.type === 'decl') {
                 node.value = strip(node.value);
             }
