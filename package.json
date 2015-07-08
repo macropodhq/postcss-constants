@@ -14,12 +14,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ojame/postcss-local-constants.git"
+    "url": "https://github.com/macropodhq/postcss-local-constants.git"
   },
   "bugs": {
-    "url": "https://github.com/ojame/postcss-local-constants/issues"
+    "url": "https://github.com/macropodhq/postcss-local-constants/issues"
   },
-  "homepage": "https://github.com/ojame/postcss-local-constants",
+  "homepage": "https://github.com/macropodhq/postcss-local-constants",
   "dependencies": {
     "postcss": "^4.1.13"
   },

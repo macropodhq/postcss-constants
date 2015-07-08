@@ -3,8 +3,8 @@
 [PostCSS] plugin to process imported constants from a file, removing them from a global scope.
 
 [PostCSS]: https://github.com/postcss/postcss
-[ci-img]:  https://travis-ci.org/ojame/postcss-local-constants.svg
-[ci]:      https://travis-ci.org/ojame/postcss-local-constants
+[ci-img]:  https://travis-ci.org/macropodhq/postcss-local-constants.svg
+[ci]:      https://travis-ci.org/macropodhq/postcss-local-constants
 
 **constants.js**
 ```js
