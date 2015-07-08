@@ -1,4 +1,4 @@
-[{
+module.exports = {
   colors: {
     primary: '#8EE7D3',
   },
@@ -11,4 +11,4 @@
     weight: '2px',
     style: 'solid',
   },
-}]
+};

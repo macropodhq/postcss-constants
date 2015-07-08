@@ -6,13 +6,13 @@
 [ci-img]:  https://travis-ci.org/ojame/postcss-local-vars.svg
 [ci]:      https://travis-ci.org/ojame/postcss-local-vars
 
-**vars.json**
+**vars.js**
 ```js
-[{
+module.exports = {
   colors: {
     primary: '#8EE7D3',
   },
-}]
+};
 ```
 
 **input**
@@ -32,14 +32,14 @@
 
 #### Within static values
 
-**vars.json**
+**vars.js**
 ```js
-[{
+module.exports = {
   borders: {
     weight: '2px',
     style: 'solid',
   },
-}]
+};
 ```
 
 **input**
@@ -59,13 +59,13 @@
 
 #### @ Rules
 
-**vars.json**
+**vars.js**
 ```js
-[{
+module.exports = {
   queries: {
     maxWidth: '200px',
   },
-}]
+}
 ```
 
 **input**

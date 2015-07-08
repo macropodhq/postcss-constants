@@ -1,5 +1,5 @@
 var postcss = require('postcss');
-var fs = require('fs');
+var nodepath = require('path');
 var _ = require('lodash-node');
 
 module.exports = postcss.plugin('postcss-local-vars', function (opts) {
@@ -8,14 +8,9 @@ module.exports = postcss.plugin('postcss-local-vars', function (opts) {
 
     var regex = /((?:[A-z]+))( )(from)(\s+)(~)((?:[A-z]+))/g;
 
-    var readFile = function(file) {
-        return fs.readFileSync(file, 'utf8');
-    };
-
     var getVariables = function(name, path) {
-        var file = readFile(path.replace(/'|"/g, ''));
         var requiredSet = name.replace(/~/g, '');
-        var variableSets = eval(file)[0];
+        var variableSets = require(nodepath.resolve('./', JSON.parse(path)));
         if (variableSets[requiredSet]) {
             if (sets[requiredSet]) {
                 sets[requiredSet] = _.assign({}, sets[requiredSet], variableSets[requiredSet]);
