@@ -1,12 +1,12 @@
-# PostCSS Local Vars [![Build Status][ci-img]][ci]
+# PostCSS Local Constants [![Build Status][ci-img]][ci]
 
-[PostCSS] plugin to process imported variables from a file, removing them from a global scope.
+[PostCSS] plugin to process imported constants from a file, removing them from a global scope.
 
 [PostCSS]: https://github.com/postcss/postcss
-[ci-img]:  https://travis-ci.org/ojame/postcss-local-vars.svg
-[ci]:      https://travis-ci.org/ojame/postcss-local-vars
+[ci-img]:  https://travis-ci.org/ojame/postcss-local-constants.svg
+[ci]:      https://travis-ci.org/ojame/postcss-local-constants
 
-**vars.js**
+**constants.js**
 ```js
 module.exports = {
   colors: {
@@ -17,7 +17,7 @@ module.exports = {
 
 **input**
 ```css
-~colors: "./vars.json";
+~colors: "./constants.json";
 .foo {
   color: primary from ~colors;
 }
@@ -32,7 +32,7 @@ module.exports = {
 
 #### Within static values
 
-**vars.js**
+**constants.js**
 ```js
 module.exports = {
   borders: {
@@ -44,7 +44,7 @@ module.exports = {
 
 **input**
 ```css
-~borders: "./vars.json";
+~borders: "./constants.json";
 .foo {
   border: weight from ~borders style from ~borders black;
 }
@@ -59,7 +59,7 @@ module.exports = {
 
 #### @ Rules
 
-**vars.js**
+**constants.js**
 ```js
 module.exports = {
   queries: {
@@ -70,7 +70,7 @@ module.exports = {
 
 **input**
 ```css
-~queries: "./vars.json";
+~queries: "./constants.json";
 
 @media (max-width: maxWidth from ~queries) {
   color: blue;
@@ -87,15 +87,15 @@ module.exports = {
 ## Usage
 
 ```js
-postcss([ require('postcss-local-vars') ])
+postcss([ require('postcss-local-constants') ])
 ```
 
-You can pass a default set of variables (that can be overriden), if you want to update default variables in webpack hot reload:
+You can pass a default set of constants (that can be overriden), if you want to update default constants in webpack hot reload:
 
 
 ```js
 postcss([
-  localVars({
+  localConsts({
     defaults: {
       colors: {
         primary: 'blue',
@@ -105,4 +105,4 @@ postcss([
 ])
 ```
 
-Call `postcss-local-vars` before any plugins that will compute values stored in variables. See [PostCSS] docs for examples for your environment.
+Call `postcss-local-constants` before any plugins that will compute values stored in constants. See [PostCSS] docs for examples for your environment.

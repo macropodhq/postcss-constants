@@ -2,22 +2,22 @@ var postcss = require('postcss');
 var nodepath = require('path');
 var _ = require('lodash-node');
 
-module.exports = postcss.plugin('postcss-local-vars', function (opts) {
+module.exports = postcss.plugin('postcss-local-constants', function (opts) {
     var sets = opts && opts.defaults || {};
     var globalNode;
 
     var regex = /((?:[A-z]+))( )(from)(\s+)(~)((?:[A-z]+))/g;
 
-    var getVariables = function(name, path) {
+    var getConstants = function(name, path) {
         var requiredSet = name.replace(/~/g, '');
-        var variableSets = require(nodepath.resolve('./', JSON.parse(path)));
-        if (variableSets[requiredSet]) {
+        var constantSets = require(nodepath.resolve('./', JSON.parse(path)));
+        if (constantSets[requiredSet]) {
             if (sets[requiredSet]) {
-                sets[requiredSet] = _.assign({}, sets[requiredSet], variableSets[requiredSet]);
+                sets[requiredSet] = _.assign({}, sets[requiredSet], constantSets[requiredSet]);
             }
 
             else {
-                sets[requiredSet] = variableSets[requiredSet];
+                sets[requiredSet] = constantSets[requiredSet];
             }
         }
     };
@@ -26,15 +26,15 @@ module.exports = postcss.plugin('postcss-local-vars', function (opts) {
         return context.indexOf(' ~') !== -1;
     };
 
-    var getValue = function(variable, parent) {
+    var getValue = function(constant, parent) {
         if (!sets[parent]) {
             throw globalNode.error('No such set `' + parent + '`');
         }
 
-        if (!sets[parent][variable]) {
-            throw globalNode.error('No such variable `' + variable + '` in `' + parent + '`');
+        if (!sets[parent][constant]) {
+            throw globalNode.error('No such constant `' + constant + '` in `' + parent + '`');
         }
-        return sets[parent][variable];
+        return sets[parent][constant];
     };
 
     var strip = function(context) {
@@ -47,10 +47,10 @@ module.exports = postcss.plugin('postcss-local-vars', function (opts) {
         requires.forEach(function(require) {
             var matches = regex.exec(require);
             regex.lastIndex = 0;
-            var variable = matches[1];
-            var variableSet = matches[matches.length - 1];
+            var constant = matches[1];
+            var constantSet = matches[matches.length - 1];
 
-            context = context.replace(require, getValue(variable, variableSet));
+            context = context.replace(require, getValue(constant, constantSet));
         });
 
         return context;
@@ -60,7 +60,7 @@ module.exports = postcss.plugin('postcss-local-vars', function (opts) {
         css.eachInside(function (node) {
             globalNode = node;
             if (node.prop && node.prop.indexOf('~') > -1) {
-                getVariables(node.prop, node.value);
+                getConstants(node.prop, node.value);
             }
 
             if (node.type === 'decl') {

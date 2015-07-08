@@ -1,24 +1,25 @@
 {
-  "name": "postcss-local-vars",
+  "name": "postcss-local-constants",
   "version": "0.0.1",
-  "description": "PostCSS plugin to process imported variables from a file, removing them from a global scope.",
+  "description": "PostCSS plugin to process imported constants from a file, removing them from a global scope.",
   "keywords": [
     "postcss",
     "css",
     "postcss-plugin",
     "variables",
-    "localised"
+    "localised",
+    "constants"
   ],
   "author": "James Coleman <james.coleman@bugherd.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ojame/postcss-local-vars.git"
+    "url": "https://github.com/ojame/postcss-local-constants.git"
   },
   "bugs": {
-    "url": "https://github.com/ojame/postcss-local-vars/issues"
+    "url": "https://github.com/ojame/postcss-local-constants/issues"
   },
-  "homepage": "https://github.com/ojame/postcss-local-vars",
+  "homepage": "https://github.com/ojame/postcss-local-constants",
   "dependencies": {
     "postcss": "^4.1.13"
   },
