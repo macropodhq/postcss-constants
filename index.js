@@ -61,6 +61,7 @@ module.exports = postcss.plugin('postcss-local-constants', function (opts) {
             globalNode = node;
             if (node.prop && node.prop.indexOf('~') > -1) {
                 getConstants(node.prop, node.value);
+                node.removeSelf();
             }
 
             if (node.type === 'decl') {
