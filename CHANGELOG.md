@@ -1,3 +1,6 @@
+## 0.0.4
+* `lodash` is a dep
+
 ## 0.0.3
 * Remove `~foo: './bar.js'` declaration after parsing.
 
