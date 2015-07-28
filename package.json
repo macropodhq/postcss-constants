@@ -21,14 +21,14 @@
   },
   "homepage": "https://github.com/macropodhq/postcss-local-constants",
   "dependencies": {
+    "lodash-node": "^3.10.0",
     "postcss": "^4.1.13"
   },
   "devDependencies": {
     "chai": "^3.0.0",
     "gulp": "^3.9.0",
     "gulp-eslint": "^0.14.0",
-    "gulp-mocha": "^2.1.2",
-    "lodash-node": "^3.10.0"
+    "gulp-mocha": "^2.1.2"
   },
   "scripts": {
     "test": "gulp"
