@@ -1,6 +1,6 @@
 var postcss = require('postcss');
 var nodepath = require('path');
-var _ = require('lodash-node');
+var assign = require('lodash/object/assign');
 
 module.exports = postcss.plugin('postcss-local-constants', function (opts) {
     var sets = opts && opts.defaults || {};
@@ -13,7 +13,7 @@ module.exports = postcss.plugin('postcss-local-constants', function (opts) {
         var constantSets = require(nodepath.resolve('./', JSON.parse(path)));
         if (constantSets[requiredSet]) {
             if (sets[requiredSet]) {
-                sets[requiredSet] = _.assign({}, sets[requiredSet], constantSets[requiredSet]);
+                sets[requiredSet] = assign({}, sets[requiredSet], constantSets[requiredSet]);
             }
 
             else {
