@@ -1,3 +1,6 @@
+## 0.0.5
+* `lodash` is used directly rather than `lodash-node`
+
 ## 0.0.4
 * `lodash` is a dep
 
