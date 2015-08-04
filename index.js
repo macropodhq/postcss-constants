@@ -1,6 +1,7 @@
 var postcss = require('postcss');
 var nodepath = require('path');
 var assign = require('lodash/object/assign');
+var resolve = require('resolve');
 
 module.exports = postcss.plugin('postcss-local-constants', function (opts) {
     var sets = opts && opts.defaults || {};
@@ -8,9 +9,11 @@ module.exports = postcss.plugin('postcss-local-constants', function (opts) {
 
     var regex = /((?:[A-z]+))( )(from)(\s+)(~)((?:[A-z]+))/g;
 
-    var getConstants = function(name, path) {
+    var getConstants = function(name, path, directory) {
+        var res = resolve.sync(JSON.parse(path), { basedir: nodepath.dirname(directory) });
         var requiredSet = name.replace(/~/g, '');
-        var constantSets = require(nodepath.resolve('./', JSON.parse(path)));
+        var constantSets = require(res);
+
         if (constantSets[requiredSet]) {
             if (sets[requiredSet]) {
                 sets[requiredSet] = assign({}, sets[requiredSet], constantSets[requiredSet]);
@@ -60,7 +63,7 @@ module.exports = postcss.plugin('postcss-local-constants', function (opts) {
         css.eachInside(function (node) {
             globalNode = node;
             if (node.prop && node.prop.indexOf('~') > -1) {
-                getConstants(node.prop, node.value);
+                getConstants(node.prop, node.value, node.source.input.from);
                 node.removeSelf();
             }
 
