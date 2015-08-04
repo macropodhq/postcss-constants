@@ -1,6 +1,6 @@
 {
   "name": "postcss-local-constants",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "PostCSS plugin to process imported constants from a file, removing them from a global scope.",
   "keywords": [
     "postcss",

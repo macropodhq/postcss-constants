@@ -1,3 +1,6 @@
+## 0.0.6
+* Referencing module paths is now the same as a `require` - it's relative to the current directory.
+
 ## 0.0.5
 * `lodash` is used directly rather than `lodash-node`
 
