@@ -22,7 +22,8 @@
   "homepage": "https://github.com/macropodhq/postcss-local-constants",
   "dependencies": {
     "lodash": "^3.10.0",
-    "postcss": "^4.1.13"
+    "postcss": "^4.1.13",
+    "resolve": "^1.1.6"
   },
   "devDependencies": {
     "chai": "^3.0.0",
