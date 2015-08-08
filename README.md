@@ -17,7 +17,7 @@ module.exports = {
 
 **input**
 ```css
-~colors: "./constants.json";
+~colors: "./constants.js";
 .foo {
   color: primary from ~colors;
 }
@@ -44,7 +44,7 @@ module.exports = {
 
 **input**
 ```css
-~borders: "./constants.json";
+~borders: "./constants.js";
 .foo {
   border: weight from ~borders style from ~borders black;
 }
@@ -70,7 +70,7 @@ module.exports = {
 
 **input**
 ```css
-~queries: "./constants.json";
+~queries: "./constants.js";
 
 @media (max-width: maxWidth from ~queries) {
   color: blue;
