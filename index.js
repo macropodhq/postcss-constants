@@ -7,7 +7,7 @@ module.exports = postcss.plugin('postcss-local-constants', function (opts) {
     var sets = opts && opts.defaults || {};
     var globalNode;
 
-    var regex = /((?:[A-z]+))( )(from)(\s+)(~)((?:[A-z]+))/g;
+    var regex = /((?:[\w]+))( )(from)(\s+)(~)((?:[A-z]+))/g;
 
     var getConstants = function(name, path, directory) {
         var res = resolve.sync(JSON.parse(path), { basedir: nodepath.dirname(directory) });
