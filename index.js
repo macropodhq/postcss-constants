@@ -7,7 +7,7 @@ module.exports = postcss.plugin('postcss-local-constants', function (opts) {
     var sets = opts && opts.defaults || {};
     var globalNode;
 
-    var regex = /((?:[\w]+))( )(from)(\s+)(~)((?:[A-z]+))/g;
+    var regex = /(~)((?:[\w]+))(\.)((?:[\w]+))/g;
 
     var getConstants = function(name, path, directory) {
         var res = resolve.sync(JSON.parse(path), { basedir: nodepath.dirname(directory) });
@@ -26,7 +26,7 @@ module.exports = postcss.plugin('postcss-local-constants', function (opts) {
     };
 
     var requiresAction = function(context) {
-        return context.indexOf(' ~') !== -1;
+        return !!context.match(regex);
     };
 
     var getValue = function(constant, parent) {
@@ -50,8 +50,8 @@ module.exports = postcss.plugin('postcss-local-constants', function (opts) {
         requires.forEach(function(require) {
             var matches = regex.exec(require);
             regex.lastIndex = 0;
-            var constant = matches[1];
-            var constantSet = matches[matches.length - 1];
+            var constant = matches[matches.length - 1];
+            var constantSet = matches[2];
 
             context = context.replace(require, getValue(constant, constantSet));
         });
