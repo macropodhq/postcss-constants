@@ -1,3 +1,6 @@
+## 0.1.0
+* Interface Tidy. `blue from ~colors` is now `~colors.blue`.
+
 ## 0.0.7
 * Allow constants to have integers in name (`color1`)
 
