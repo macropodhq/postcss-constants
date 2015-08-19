@@ -19,7 +19,7 @@ module.exports = {
 ```css
 ~colors: "./constants.js";
 .foo {
-  color: primary from ~colors;
+  color: ~colors.primary;
 }
 ```
 
@@ -46,7 +46,7 @@ module.exports = {
 ```css
 ~borders: "./constants.js";
 .foo {
-  border: weight from ~borders style from ~borders black;
+  border: ~borders.weight ~borders.style black;
 }
 ```
 
@@ -72,7 +72,7 @@ module.exports = {
 ```css
 ~queries: "./constants.js";
 
-@media (max-width: maxWidth from ~queries) {
+@media (max-width: ~queries.maxWidth) {
   color: blue;
 }
 ```
