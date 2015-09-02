@@ -3,7 +3,7 @@ var nodepath = require('path');
 var assign = require('lodash/object/assign');
 var resolve = require('resolve');
 
-module.exports = postcss.plugin('postcss-local-constants', function (opts) {
+module.exports = postcss.plugin('postcss-constants', function (opts) {
     var sets = opts && opts.defaults || {};
     var globalNode;
 

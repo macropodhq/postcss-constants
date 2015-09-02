@@ -1,25 +1,25 @@
 {
-  "name": "postcss-local-constants",
+  "name": "postcss-constants",
   "version": "0.1.0",
-  "description": "PostCSS plugin to process imported constants from a file, removing them from a global scope.",
+  "description": "PostCSS plugin to process imported constants from a file.",
   "keywords": [
     "postcss",
     "css",
     "postcss-plugin",
     "variables",
-    "localised",
-    "constants"
+    "constants",
+    "css-modules"
   ],
   "author": "James Coleman <james.coleman@bugherd.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/macropodhq/postcss-local-constants.git"
+    "url": "https://github.com/macropodhq/postcss-constants.git"
   },
   "bugs": {
-    "url": "https://github.com/macropodhq/postcss-local-constants/issues"
+    "url": "https://github.com/macropodhq/postcss-constants/issues"
   },
-  "homepage": "https://github.com/macropodhq/postcss-local-constants",
+  "homepage": "https://github.com/macropodhq/postcss-constants",
   "dependencies": {
     "lodash": "^3.10.0",
     "postcss": "^4.1.13",

@@ -13,7 +13,7 @@ var test = function (input, output, opts, done) {
     });
 };
 
-describe('postcss-local-constants', function () {
+describe('postcss-constants', function () {
     it('does not replace static values', function (done) {
         test('a{color: #8EE7D3}', 'a{color: #8EE7D3}', { }, done);
     });

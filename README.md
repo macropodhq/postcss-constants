@@ -1,10 +1,10 @@
-# PostCSS Local Constants [![Build Status][ci-img]][ci]
+# PostCSS Constants [![Build Status][ci-img]][ci]
 
-[PostCSS] plugin to process imported constants from a file, removing them from a global scope.
+[PostCSS] plugin to process imported constants from a file.
 
 [PostCSS]: https://github.com/postcss/postcss
-[ci-img]:  https://travis-ci.org/macropodhq/postcss-local-constants.svg
-[ci]:      https://travis-ci.org/macropodhq/postcss-local-constants
+[ci-img]:  https://travis-ci.org/macropodhq/postcss-constants.svg
+[ci]:      https://travis-ci.org/macropodhq/postcss-constants
 
 **constants.js**
 ```js
@@ -87,7 +87,7 @@ module.exports = {
 ## Usage
 
 ```js
-postcss([ require('postcss-local-constants') ])
+postcss([ require('postcss-constants') ])
 ```
 
 You can pass a default set of constants (that can be overriden), if you want to update default constants in webpack hot reload:
@@ -95,7 +95,7 @@ You can pass a default set of constants (that can be overriden), if you want to 
 
 ```js
 postcss([
-  localConsts({
+  constants({
     defaults: {
       colors: {
         primary: 'blue',
@@ -105,4 +105,4 @@ postcss([
 ])
 ```
 
-Call `postcss-local-constants` before any plugins that will compute values stored in constants. See [PostCSS] docs for examples for your environment.
+Call `postcss-constants` before any plugins that will compute values stored in constants. See [PostCSS] docs for examples for your environment.
