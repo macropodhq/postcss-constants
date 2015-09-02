@@ -1,3 +1,6 @@
+## 0.1.1
+* `postcss-local-constants` -> `postcss-constants`.
+
 ## 0.1.0
 * Interface Tidy. `blue from ~colors` is now `~colors.blue`.
 
