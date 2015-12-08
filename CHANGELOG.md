@@ -1,3 +1,6 @@
+## 0.1.2
+* Use POSTCSS v5 api.
+
 ## 0.1.1
 * `postcss-local-constants` -> `postcss-constants`.
 
