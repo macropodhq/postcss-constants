@@ -60,11 +60,11 @@ module.exports = postcss.plugin('postcss-constants', function (opts) {
     };
 
     return function (css) {
-        css.eachInside(function (node) {
+        css.walk(function (node) {
             globalNode = node;
             if (node.prop && node.prop.indexOf('~') > -1) {
                 getConstants(node.prop, node.value, node.source.input.from);
-                node.removeSelf();
+                node.remove();
             }
 
             if (node.type === 'decl') {
