@@ -1,3 +1,6 @@
+## 0.1.3
+* Actually use POSTCSS v5.
+
 ## 0.1.2
 * Use POSTCSS v5 api.
 
