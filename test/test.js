@@ -22,6 +22,10 @@ describe('postcss-constants', function () {
         test('~colors: "./test/constants.js"; a{color: ~colors.primary;}', 'a{color: #8EE7D3;}', { }, done);
     });
 
+    it('replaces constants in values with single quotes', function (done) {
+        test('~colors: \'./test/constants.js\'; a{color: ~colors.primary;}', 'a{color: #8EE7D3;}', { }, done);
+    });
+
     it('replaces constants in values without semi-colons', function (done) {
         test('~colors: "./test/constants.js"; a{background: blue; color: ~colors.primary}', 'a{background: blue; color: #8EE7D3}', { }, done);
     });

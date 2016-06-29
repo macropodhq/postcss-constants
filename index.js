@@ -10,6 +10,7 @@ module.exports = postcss.plugin('postcss-constants', function (opts) {
     var regex = /~([\w]+)\.([\w]+)/g;
 
     var getConstants = function(name, path, directory) {
+        path = path.replace(/'/g, '"');
         var res = resolve.sync(JSON.parse(path), { basedir: nodepath.dirname(directory) });
         var requiredSet = name.replace(/~/g, '');
         var constantSets = require(res);
