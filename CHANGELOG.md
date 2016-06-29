@@ -1,3 +1,6 @@
+## 0.1.4
+* Paths can be wrapped in single quotes (')
+
 ## 0.1.3
 * Actually use POSTCSS v5.
 
