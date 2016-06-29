@@ -69,4 +69,8 @@ describe('postcss-constants', function () {
     it('replaces constants in values with trailing slash in baseDir', function (done) {
         test('~colors: "root/constants.js"; a{color: ~colors.primary;}', 'a{color: #8EE7D3;}', { baseDir: '/test/' }, done);
     });
+
+    it('replaces constants in values with no slash in baseDir', function (done) {
+        test('~colors: "root/constants.js"; a{color: ~colors.primary;}', 'a{color: #8EE7D3;}', { baseDir: 'test' }, done);
+    });
 });

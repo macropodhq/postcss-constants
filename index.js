@@ -14,7 +14,7 @@ module.exports = postcss.plugin('postcss-constants', function (opts) {
 
         var res = resolve.sync(JSON.parse(path), {
             basedir: nodepath.dirname(directory),
-            paths: opts.baseDir ? this.process.env.PWD + opts.baseDir : this.process.env.PWD
+            paths: opts.baseDir ? nodepath.join(this.process.env.PWD, opts.baseDir) : this.process.env.PWD
         });
 
         var requiredSet = name.replace(/~/g, '');
