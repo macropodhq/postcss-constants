@@ -12,7 +12,7 @@ gulp.task('lint', function (done) {
 
 gulp.task('test', function (done) {
     var mocha = require('gulp-mocha');
-    return gulp.src('test/*.js', { read: false })
+    return gulp.src('test/root/*.js', { read: false })
         .pipe(mocha()).on('error', done);
 });
 
