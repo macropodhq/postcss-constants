@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/macropodhq/postcss-constants",
   "dependencies": {
+    "dotty": "0.0.2",
     "lodash": "^3.10.0",
     "postcss": "^5.0.12",
     "resolve": "^1.1.6"

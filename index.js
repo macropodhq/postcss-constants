@@ -2,12 +2,13 @@ var postcss = require('postcss');
 var nodepath = require('path');
 var assign = require('lodash/object/assign');
 var resolve = require('resolve');
+var dotty = require('dotty');
 
 module.exports = postcss.plugin('postcss-constants', function (opts) {
     var sets = opts && opts.defaults || {};
     var globalNode;
 
-    var regex = /~([\w]+)\.([\w]+)/g;
+    var regex = /~([\w]+)\.([\w]+)([a-zA-Z0-9\.]*)/g;
 
     var getConstants = function(name, path, directory) {
         path = path.replace(/'/g, '"');
@@ -35,15 +36,14 @@ module.exports = postcss.plugin('postcss-constants', function (opts) {
         return !!context.match(regex);
     };
 
-    var getValue = function(constant, parent) {
-        if (!sets[parent]) {
-            throw globalNode.error('No such set `' + parent + '`');
-        }
+    var getValue = function(path) {
+        var value = dotty.get(sets, path);
 
-        if (!sets[parent][constant]) {
-            throw globalNode.error('No such constant `' + constant + '` in `' + parent + '`');
+        if (value === undefined) {
+            throw globalNode.error('No such set `' + path + '`');
+        } else {
+            return value;
         }
-        return sets[parent][constant];
     };
 
     var strip = function(context) {
@@ -54,12 +54,9 @@ module.exports = postcss.plugin('postcss-constants', function (opts) {
         var requires = context.match(regex);
 
         requires.forEach(function(require) {
-            var matches = regex.exec(require);
-            regex.lastIndex = 0;
-            var constant = matches[2];
-            var constantSet = matches[1];
+            var path = require.substring(1);
 
-            context = context.replace(require, getValue(constant, constantSet));
+            context = context.replace(require, getValue(path));
         });
 
         return context;

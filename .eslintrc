@@ -13,7 +13,8 @@
         "indent":                [2],
         "quotes":                [2, "single", "avoid-escape"],
         "curly":                 [0],
-        "comma-dangle":          [0]
+        "comma-dangle":          [0],
+        "brace-style":           [0, '1tbs']
     },
     "env": {
         "mocha": true,

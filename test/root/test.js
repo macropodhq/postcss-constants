@@ -73,4 +73,8 @@ describe('postcss-constants', function () {
     it('replaces constants in values with no slash in baseDir', function (done) {
         test('~colors: "root/constants.js"; a{color: ~colors.primary;}', 'a{color: #8EE7D3;}', { baseDir: 'test' }, done);
     });
+
+    it('replaces constants in values from a nested structure', function (done) {
+        test('~queries: "root/constants.js"; @media (max-width: ~queries.mobile.small) {color: red;}', '@media (max-width: 100px) {color: red;}', { baseDir: '/test' }, done);
+    });
 });

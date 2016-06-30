@@ -57,6 +57,30 @@ module.exports = {
 }
 ```
 
+#### Nested values
+
+**constants.js**
+```js
+module.exports = {
+  theme: {
+    orange: {
+      color: 'orange',
+      icons: {
+        color: 'green',
+      },
+    },
+  },
+};
+```
+
+**input**
+```css
+~theme: "./constants.js";
+.icon {
+  background: ~theme.orange.icons.color;
+}
+```
+
 #### @ Rules
 
 **constants.js**
