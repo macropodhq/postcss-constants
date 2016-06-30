@@ -1,3 +1,7 @@
+## 0.2.0
+* Nesting to the nth level works (~colors.blues.bright.primary)
+* `baseDir` is an option that allows paths to be found in another directory
+
 ## 0.1.4
 * Paths can be wrapped in single quotes (')
 

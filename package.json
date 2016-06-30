@@ -1,6 +1,6 @@
 {
   "name": "postcss-constants",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "description": "PostCSS plugin to process imported constants from a file.",
   "keywords": [
     "postcss",
